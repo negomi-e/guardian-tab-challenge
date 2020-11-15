@@ -1,10 +1,13 @@
 'use strict';
 
+import {getHeadline} from './getHeadlines';
+
 const onTabClick = (event) => {
     //edit tabs
     let activeNavTabs = document.querySelectorAll('.activeNav')
     activeNavTabs.forEach(el => {
         el.className = el.className.replace('activeNav', '');
+        el.removeAttribute('aria-selected')
     })
     event.target.setAttribute("aria-selected", true);
     event.target.parentElement.className = "activeNav"
@@ -34,53 +37,63 @@ tabs.addEventListener('keydown', (event) => {
 
 
 const fetchHeadlines = async () => {
+    
+    let titles = document.querySelectorAll('.tab');
+    let activeItem = document.querySelector('.activeNav');
+    let active = false;
+    titles.forEach(item=>{
+        let title = item.id
+        if(title === activeItem.id){
+            active= true
+        }
+        // await getHeadline(title, active);
+    })
+    
 
-    const tabContents = document.getElementById('tab-content')
+    // Promise.all([
+    //     fetch('https://content.guardianapis.com/search?order-by=relevance&q=uknews&api-key=test'),
+    //     fetch('https://content.guardianapis.com/search?section=sport&order-by=newest&page=20&q=sport&api-key=test'),
+    //     fetch('https://content.guardianapis.com/search?order-by=relevance&q=travel&api-key=test')
+    // ])
+    //     .then((responses) => Promise.all(responses.map((response) => {
+    //         // console.log('this is response', response)
+    //         return response.json();
+    //     })
+    //     ).then((data) => {
+    //         const allHeadlines = [];
+    //         data.forEach(set => {
+    //             console.log('first group', set)
+    //             allHeadlines.push(set.response.results)
 
-    Promise.all([
-        fetch('https://content.guardianapis.com/search?order-by=relevance&q=uknews&api-key=test'),
-        fetch('https://content.guardianapis.com/search?section=sport&order-by=newest&page=20&q=sport&api-key=test'),
-        fetch('https://content.guardianapis.com/search?order-by=relevance&q=travel&api-key=test')
-    ])
-        .then((responses) => Promise.all(responses.map((response) => {
-            // console.log('this is response', response)
-            return response.json();
-        })
-        ).then((data) => {
-            const allHeadlines = [];
-            data.forEach(set => {
-                console.log('first group', set)
-                allHeadlines.push(set.response.results)
+    //         })
 
-            })
-
-            console.log(allHeadlines)
-            allHeadlines.forEach(category => {
+    //         console.log(allHeadlines)
+    //         allHeadlines.forEach(category => {
 
 
-                category.forEach(element => {
-                    console.log('this is an element', element)
-                    if (element.sectionId === 'travel' || element.sectionId === 'uk-news' || element.sectionId === 'sport') {
+    //             category.forEach(element => {
+    //                 console.log('this is an element', element)
+    //                 if (element.sectionId === 'travel' || element.sectionId === 'uk-news' || element.sectionId === 'sport') {
 
-                        let panel = document.getElementById(element.sectionId)
+    //                     let panel = document.getElementById(element.sectionId)
                         
-                        let list = panel.getElementsByTagName('ol')[0];
-                        console.log(list)
-                        let item = document.createElement('li');
-                        let link = document.createElement('a');
-                        link.setAttribute('href', element.webUrl)
-                        link.appendChild(document.createTextNode(element.webTitle))
-                        item.appendChild(link)
-                        list.appendChild(item)
-                        panel.appendChild(list)
-                    }
+    //                     let list = panel.getElementsByTagName('ol')[0];
+    //                     console.log(list)
+    //                     let item = document.createElement('li');
+    //                     let link = document.createElement('a');
+    //                     link.setAttribute('href', element.webUrl)
+    //                     link.appendChild(document.createTextNode(element.webTitle))
+    //                     item.appendChild(link)
+    //                     list.appendChild(item)
+    //                     panel.appendChild(list)
+    //                 }
 
-                })
-            })
-        })
-            .catch((error) => console.log(error))
+    //             })
+    //         })
+    //     })
+    //         .catch((error) => console.log(error))
 
-        )
+        // )
 }
 
 // const loadPage = async () =>{
