@@ -14,13 +14,13 @@
     <section role="tabcomponent">
         <nav role="navigation">
             <ul role="tablist">
-                <li role="tab" class="activeNav"><a href="#uk-news" aria-selected="true">UK NEWS</a></li>
-                <li role="tab"><a href="#sport">SPORT</a></li>
-                <li role="tab"><a href="#travel">TRAVEL</a></li>
+                <li role="tab" id="uk-news" class="tab activeNav"><a href="#uk-news" aria-selected="true">UK NEWS</a></li>
+                <li role="tab" id="sport" class="tab"><a href="#sport">SPORT</a></li>
+                <li role="tab" id="travel" class="tab"><a href="#travel">TRAVEL</a></li>
             </ul>
         </nav>
         <div id="tab-content">
-            <article role="tabpanel" aria-hidden="false" class="tab-panel active" id="uk-news">
+            <!-- <article role="tabpanel" aria-hidden="false" class="tab-panel active" id="uk-news">
                 <ol></ol>
             </article>
             <article role="tabpanel" aria-hidden="true" class="tab-panel inactive" id="sport">
@@ -28,10 +28,11 @@
             </article>
             <article role="tabpanel" aria-hidden="true" class="tab-panel inactive" id="travel">
                 <ol></ol>
-            </article>
+            </article> -->
         </div>
     </section>
-    <script src="static/main.js"></script>
+    <script type="module" src="static/main.js"></script>
+    <noscript>Your browser does not support JavaScript!</noscript>
     <!-- <script src="/bundle.js"></script> -->
 </body>
 
