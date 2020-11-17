@@ -1,6 +1,8 @@
 'use strict';
 
-import {getHeadline} from './getHeadlines';
+import 'normalize.css';
+import './styles.css';
+import getHeadline from './getHeadlines';
 
 const onTabClick = (event) => {
     //edit tabs
@@ -41,12 +43,21 @@ const fetchHeadlines = async () => {
     let titles = document.querySelectorAll('.tab');
     let activeItem = document.querySelector('.activeNav');
     let active = false;
+    let tabs = document.getElementById('tab-content')
+    
     titles.forEach(item=>{
+        console.log(item)
+        tabs.appendChild(document.createTextNode(item.id))
         let title = item.id
         if(title === activeItem.id){
-            active= true
+            active = true
         }
-        // await getHeadline(title, active);
+
+        try {
+            getHeadline(title, active);
+        }catch(err){
+            console.log('there has been a prblem houston!')
+        }
     })
     
 
@@ -128,3 +139,5 @@ const fetchHeadlines = async () => {
 // }
 
 document.addEventListener('DOMContentLoaded', () => fetchHeadlines())
+
+export default {fetchHeadlines, onTabClick}

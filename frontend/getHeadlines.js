@@ -1,4 +1,4 @@
-export const getHeadline = async (title, active) => {
+const getHeadline = async (title, active) => {
     const tabContents = document.getElementById('tab-content')
     let panel = document.createElement('article');
     panel.setAttribute('role', 'tabpanel');
@@ -13,7 +13,7 @@ export const getHeadline = async (title, active) => {
     }
 
     let list = document.createElement('ol');
-    let url = `https://content.guardianapis.com/search?order-by=relevance&q=${params.title}&api-key=9wur7sdh84azzazdt3ye54k4`;
+    let url = `https://content.guardianapis.com/search?order-by=relevance&q=${title}&api-key=9wur7sdh84azzazdt3ye54k4`;
 
     fetch(url
     // , 
@@ -38,7 +38,9 @@ export const getHeadline = async (title, active) => {
             tabContents.appendChild(panel)
         })
         .catch((error) => {
-            console.lof(error)
+            console.log(error)
             panel.appendChild(document.createTextNode('No headlines available'))
         });        
 }
+
+export default getHeadline;
